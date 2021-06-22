@@ -1,64 +1,57 @@
 package declarations;
 
 public class Account {
-	private  int BorrowerID;
-	private  String BorrowerName, Address, City, Province, Country, Role;
 	
+	private  int BorrowerID;
+	private  String BorrowerName,
+					Address,
+					City,
+					Province,
+					Country,
+					Role;
+	
+
 	public int getBorrowerID() {
 		return BorrowerID;
 	}
-	
-	public void setBorrowerID(int id) {
-		BorrowerID = id;
+	public void setBorrowerID(int borrowerID) {
+		BorrowerID = borrowerID;
 	}
-	
-	// String Fields
-	public String getBorrowerName () {
+	public String getBorrowerName() {
 		return BorrowerName;
 	}
-	
-	public void setBorrowerName (String param) {
-		BorrowerName = param;
+	public void setBorrowerName(String borrowerName) {
+		BorrowerName = borrowerName;
 	}
-	
-	public String getAddress () {
+	public String getAddress() {
 		return Address;
 	}
-	
-	public void setAddress (String param) {
-		Address = param;
+	public void setAddress(String address) {
+		Address = address;
 	}
-	
-	public String getCity () {
+	public String getCity() {
 		return City;
 	}
-	
-	public void setCity (String param) {
-		City = param;
+	public void setCity(String city) {
+		City = city;
 	}
-	
-	public String getProvince () {
+	public String getProvince() {
 		return Province;
 	}
-	
-	public void setProvince (String param) {
-		Province = param;
+	public void setProvince(String province) {
+		Province = province;
 	}
-	
-	public String getCountry () {
+	public String getCountry() {
 		return Country;
 	}
-	
-	public void setCountry (String param) {
-		Country = param;
+	public void setCountry(String country) {
+		Country = country;
 	}
-	
-	public String getRole () {
+	public String getRole() {
 		return Role;
 	}
-	
-	public void setRole (String param) {
-		Role = param;
+	public void setRole(String role) {
+		Role = role;
 	}
 	
 }
