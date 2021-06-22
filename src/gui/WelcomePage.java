@@ -9,6 +9,8 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Rectangle;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -88,6 +90,14 @@ public class WelcomePage extends JFrame {
 		JPanel panelBorrowerPortal = new JPanel();
 		panelBorrowerPortal.setBorder(new LineBorder(new Color(250, 235, 215), 5, true));
 		panelBorrowerPortal.setBackground(Color.WHITE);
+		panelBorrowerPortal.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+				BorrowerPage objBorrower = new BorrowerPage();
+				objBorrower.setVisible(true);
+			}
+		});
 		GridBagConstraints gbc_panelBorrowerPortal = new GridBagConstraints();
 		gbc_panelBorrowerPortal.insets = new Insets(0, 0, 5, 0);
 		gbc_panelBorrowerPortal.fill = GridBagConstraints.BOTH;
@@ -109,6 +119,14 @@ public class WelcomePage extends JFrame {
 		JPanel panelLibrarianPortal = new JPanel();
 		panelLibrarianPortal.setBackground(new Color(255, 255, 255));
 		panelLibrarianPortal.setBorder(new LineBorder(new Color(250, 235, 215), 5, true));
+		panelLibrarianPortal.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+				LibrarianPage objLibrarian = new LibrarianPage();
+				objLibrarian.setVisible(true);
+			}
+		});
 		GridBagConstraints gbc_panelLibrarianPortal = new GridBagConstraints();
 		gbc_panelLibrarianPortal.fill = GridBagConstraints.BOTH;
 		gbc_panelLibrarianPortal.gridx = 1;

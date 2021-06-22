@@ -1,23 +1,26 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Insets;
+import java.awt.Rectangle;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.Rectangle;
+
+import gui.dialog.AddAccountDialog;
+import gui.dialog.FormDialog;
 
 public class BorrowerPage extends JFrame {
 
@@ -67,6 +70,14 @@ public class BorrowerPage extends JFrame {
 		JPanel panelWelcome = new JPanel();
 		panelWelcome.setForeground(new Color(238, 232, 170));
 		panelWelcome.setBorder(new LineBorder(new Color(255, 228, 181), 5, true));
+		panelWelcome.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+				WelcomePage objWelcome = new WelcomePage();
+				objWelcome.setVisible(true);
+			}
+		});
 		GridBagConstraints gbc_panelWelcome = new GridBagConstraints();
 		gbc_panelWelcome.gridwidth = 2;
 		gbc_panelWelcome.insets = new Insets(0, 0, 5, 0);
@@ -90,6 +101,13 @@ public class BorrowerPage extends JFrame {
 		//FormPanel
 		JPanel panelForm = new JPanel();
 		panelForm.setBorder(new LineBorder(new Color(255, 222, 173), 5, true));
+		panelForm.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				FormDialog objFormDialog = new FormDialog();
+				objFormDialog.setVisible(true);
+			}
+		});
 		GridBagConstraints gbc_panelForm = new GridBagConstraints();
 		gbc_panelForm.gridheight = 2;
 		gbc_panelForm.insets = new Insets(0, 0, 5, 5);
@@ -112,6 +130,13 @@ public class BorrowerPage extends JFrame {
 		//WelcomePanel
 		JPanel panelAddBorrower = new JPanel();
 		panelAddBorrower.setBorder(new LineBorder(new Color(255, 222, 173), 5, true));
+		panelAddBorrower.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				AddAccountDialog objAccountDialog = new AddAccountDialog();
+				objAccountDialog.setVisible(true);
+			}
+		});
 		GridBagConstraints gbc_panelAddBorrower = new GridBagConstraints();
 		gbc_panelAddBorrower.gridheight = 2;
 		gbc_panelAddBorrower.insets = new Insets(0, 0, 5, 0);
