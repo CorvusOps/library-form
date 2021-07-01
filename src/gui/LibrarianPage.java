@@ -1,24 +1,27 @@
 package gui;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Insets;
+import java.awt.Rectangle;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.Rectangle;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-
 import javax.swing.border.LineBorder;
+
+import gui.dialog.AddBookDialog;
+import gui.dialog.AddISBNDialog;
+import gui.dialog.FormDialog;
 
 public class LibrarianPage extends JFrame {
 
@@ -66,6 +69,14 @@ public class LibrarianPage extends JFrame {
 		//WelcomePanel
 		JPanel panelWelcome = new JPanel();
 		panelWelcome.setBorder(new LineBorder(new Color(255, 228, 181), 5, true));
+		panelWelcome.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+				WelcomePage objWelcome = new WelcomePage();
+				objWelcome.setVisible(true);
+			}
+		});
 		GridBagConstraints gbc_panelWelcome = new GridBagConstraints();
 		gbc_panelWelcome.gridwidth = 3;
 		gbc_panelWelcome.insets = new Insets(0, 0, 5, 5);
@@ -88,6 +99,13 @@ public class LibrarianPage extends JFrame {
 		//FormPanel
 		JPanel panelForm = new JPanel();
 		panelForm.setBorder(new LineBorder(new Color(255, 228, 181), 5, true));
+		panelForm.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				FormDialog objFormDialog = new FormDialog();
+				objFormDialog.setVisible(true);
+			}
+		});
 		GridBagConstraints gbc_panelForm = new GridBagConstraints();
 		gbc_panelForm.gridheight = 2;
 		gbc_panelForm.insets = new Insets(0, 0, 5, 5);
@@ -105,48 +123,62 @@ public class LibrarianPage extends JFrame {
 		lblFormImgLabel.setBounds(27, 19, 106, 130);
 		panelForm.add(lblFormImgLabel);
 		
-//Add Librarian Panel in
+//Add Book to Library Panel in
 		
-		//AddLibrarianPanel
-		JPanel panelAddLibrarian = new JPanel();
-		panelAddLibrarian.setBorder(new LineBorder(new Color(255, 228, 181), 5, true));
-		GridBagConstraints gbc_panelAddLibrarian = new GridBagConstraints();
-		gbc_panelAddLibrarian.insets = new Insets(0, 0, 5, 5);
-		gbc_panelAddLibrarian.gridx = 1;
-		gbc_panelAddLibrarian.gridy = 1;
-		contentPane.add(panelAddLibrarian, gbc_panelAddLibrarian);
+		//AddBookPanel
+		JPanel panelAddBook = new JPanel();
+		panelAddBook.setBorder(new LineBorder(new Color(255, 228, 181), 5, true));
+		panelAddBook.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				AddBookDialog objBook = new AddBookDialog();
+				objBook.setVisible(true);
+			}
+		});
+		GridBagConstraints gbc_panelAddBook = new GridBagConstraints();
+		gbc_panelAddBook.insets = new Insets(0, 0, 5, 5);
+		gbc_panelAddBook.gridx = 1;
+		gbc_panelAddBook.gridy = 1;
+		contentPane.add(panelAddBook, gbc_panelAddBook);
 		
 		//img
 		JLabel lblAddLibrarianImgLabel = new JLabel("");
 		lblAddLibrarianImgLabel.setBounds(new Rectangle(23, 123, 45, 67));
 		lblAddLibrarianImgLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-		Image AddLibrarianImage = new ImageIcon(this.getClass().getResource("/LogoLibrarian125px.png")).getImage();
-		panelAddLibrarian.setLayout(new GridLayout(0, 1, 0, 0));
+		Image AddLibrarianImage = new ImageIcon(this.getClass().getResource("/AddBookLibrary125px.png")).getImage();
+		panelAddBook.setLayout(new GridLayout(0, 1, 0, 0));
 		lblAddLibrarianImgLabel.setIcon(new ImageIcon(AddLibrarianImage));
 		lblAddLibrarianImgLabel.setBounds(27, 19, 106, 130);
-		panelAddLibrarian.add(lblAddLibrarianImgLabel);
+		panelAddBook.add(lblAddLibrarianImgLabel);
 		
-//Add Book Panel in
+//Add ISBN Panel in
 		
-		//AddBookPanel
-		JPanel panelAddBook = new JPanel();
-		panelAddBook.setBorder(new LineBorder(new Color(255, 228, 181), 5, true));
-		GridBagConstraints gbc_panelAddBook = new GridBagConstraints();
-		gbc_panelAddBook.insets = new Insets(0, 0, 5, 0);
-		gbc_panelAddBook.fill = GridBagConstraints.BOTH;
-		gbc_panelAddBook.gridx = 2;
-		gbc_panelAddBook.gridy = 1;
-		contentPane.add(panelAddBook, gbc_panelAddBook);
+		//AddISBNPanel
+		JPanel panelAddISBN = new JPanel();
+		panelAddISBN.setBorder(new LineBorder(new Color(255, 228, 181), 5, true));
+		panelAddISBN.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				AddISBNDialog objISBN = new AddISBNDialog();
+				objISBN.setVisible(true);
+			}
+		});
+		GridBagConstraints gbc_panelAddISBN = new GridBagConstraints();
+		gbc_panelAddISBN.insets = new Insets(0, 0, 5, 0);
+		gbc_panelAddISBN.fill = GridBagConstraints.BOTH;
+		gbc_panelAddISBN.gridx = 2;
+		gbc_panelAddISBN.gridy = 1;
+		contentPane.add(panelAddISBN, gbc_panelAddISBN);
 
 		//img
 		JLabel lblAddBookImgLabel = new JLabel("");
 		lblAddBookImgLabel.setBounds(new Rectangle(23, 123, 45, 67));
 		lblAddBookImgLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		Image AddBookImage = new ImageIcon(this.getClass().getResource("/LogoBook125px.png")).getImage();
-		panelAddBook.setLayout(new GridLayout(0, 1, 0, 0));
+		panelAddISBN.setLayout(new GridLayout(0, 1, 0, 0));
 		lblAddBookImgLabel.setIcon(new ImageIcon(AddBookImage));
 		lblAddBookImgLabel.setBounds(27, 19, 106, 130);
-		panelAddBook.add(lblAddBookImgLabel);
+		panelAddISBN.add(lblAddBookImgLabel);
 		
 //View Log Panel in
 		
