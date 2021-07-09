@@ -8,14 +8,23 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Rectangle;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import declarations.Account;
+import execs.AccountEXE;
+import gui.BorrowerPage;
+
+
+@SuppressWarnings("serial")
 public class AddAccountDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -24,9 +33,9 @@ public class AddAccountDialog extends JDialog {
 	private JTextField jtxtfieldCity;
 	private JTextField jtxtfieldProvince;
 	private JTextField jtxtfieldCountry;
+	private JTextField txtLibrarianBorrower;
 	private JTextField jtxtfieldContNumber;
 	private JTextField jtxtfieldEmail;
-	private JTextField txtLibrarianBorrower;
 
 	/**
 	 * Launch the application.
@@ -175,6 +184,29 @@ public class AddAccountDialog extends JDialog {
 			jtxtfieldCountry.setColumns(10);
 		}
 		{
+			JLabel jlblRole = new JLabel("Role:");
+			jlblRole.setFont(new Font("Lucida Console", Font.PLAIN, 12));
+			GridBagConstraints gbc_jlblRole = new GridBagConstraints();
+			gbc_jlblRole.anchor = GridBagConstraints.EAST;
+			gbc_jlblRole.insets = new Insets(0, 0, 5, 5);
+			gbc_jlblRole.gridx = 0;
+			gbc_jlblRole.gridy = 6;
+			contentPanel.add(jlblRole, gbc_jlblRole);
+		}
+		{
+			txtLibrarianBorrower = new JTextField();
+			txtLibrarianBorrower.setAlignmentX(Component.RIGHT_ALIGNMENT);
+			txtLibrarianBorrower.setText("Borrower");
+			GridBagConstraints gbc_txtLibrarianBorrower = new GridBagConstraints();
+			gbc_txtLibrarianBorrower.insets = new Insets(0, 0, 5, 0);
+			gbc_txtLibrarianBorrower.gridwidth = 2;
+			gbc_txtLibrarianBorrower.fill = GridBagConstraints.HORIZONTAL;
+			gbc_txtLibrarianBorrower.gridx = 1;
+			gbc_txtLibrarianBorrower.gridy = 6;
+			contentPanel.add(txtLibrarianBorrower, gbc_txtLibrarianBorrower);
+			txtLibrarianBorrower.setColumns(10);
+		}
+		{
 			JLabel jlblContNumber = new JLabel("Contact Number:");
 			jlblContNumber.setFont(new Font("Lucida Console", Font.PLAIN, 12));
 			GridBagConstraints gbc_jlblContNumber = new GridBagConstraints();
@@ -217,28 +249,6 @@ public class AddAccountDialog extends JDialog {
 			jtxtfieldEmail.setColumns(10);
 		}
 		{
-			JLabel jlblRole = new JLabel("Role:");
-			jlblRole.setFont(new Font("Lucida Console", Font.PLAIN, 12));
-			GridBagConstraints gbc_jlblRole = new GridBagConstraints();
-			gbc_jlblRole.anchor = GridBagConstraints.EAST;
-			gbc_jlblRole.insets = new Insets(0, 0, 0, 5);
-			gbc_jlblRole.gridx = 0;
-			gbc_jlblRole.gridy = 10;
-			contentPanel.add(jlblRole, gbc_jlblRole);
-		}
-		{
-			txtLibrarianBorrower = new JTextField();
-			txtLibrarianBorrower.setAlignmentX(Component.RIGHT_ALIGNMENT);
-			txtLibrarianBorrower.setText("Borrower");
-			GridBagConstraints gbc_txtLibrarianBorrower = new GridBagConstraints();
-			gbc_txtLibrarianBorrower.gridwidth = 2;
-			gbc_txtLibrarianBorrower.fill = GridBagConstraints.HORIZONTAL;
-			gbc_txtLibrarianBorrower.gridx = 1;
-			gbc_txtLibrarianBorrower.gridy = 10;
-			contentPanel.add(txtLibrarianBorrower, gbc_txtLibrarianBorrower);
-			txtLibrarianBorrower.setColumns(10);
-		}
-		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			GridBagConstraints gbc_buttonPane = new GridBagConstraints();
@@ -250,12 +260,56 @@ public class AddAccountDialog extends JDialog {
 			{
 				JButton addButton = new JButton("Add");
 				addButton.setActionCommand("OK");
+				addButton.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						Account account = new Account();
+						boolean boolIsFilled = !jtxtfieldAccountName.getText().equals("") && !jtxtfieldAddress.getText().equals("") &&
+											   !jtxtfieldCity.getText().equals("") &&  !jtxtfieldProvince.getText().equals("") &&
+											   !jtxtfieldCountry.getText().equals("") && !jtxtfieldContNumber.getText().equals("") &&
+											   !jtxtfieldEmail.getText().equals("") && !txtLibrarianBorrower.getText().equals("") ;
+						try { 
+							if (boolIsFilled) {
+								AccountEXE.setValues(account,
+										jtxtfieldAccountName.getText(),
+										jtxtfieldAddress.getText(),
+										jtxtfieldCity.getText(),
+										jtxtfieldProvince.getText(),
+										jtxtfieldCountry.getText(),
+										txtLibrarianBorrower.getText(),
+										jtxtfieldContNumber.getText(),
+										jtxtfieldEmail.getText());
+									
+								
+								JOptionPane.showMessageDialog(null, AccountEXE.exeInsertStatements(account));
+								
+								setVisible(false);
+								BorrowerPage pageBorrower = new BorrowerPage();
+								pageBorrower.setVisible(true);
+							} else {
+								JOptionPane.showMessageDialog(null, "Input Required Fields");
+							}
+						} catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+				});
 				buttonPane.add(addButton);
 				getRootPane().setDefaultButton(addButton);
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.setActionCommand("Cancel");
+				cancelButton.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						setVisible(false);
+						JOptionPane.showMessageDialog(null, "Cancel Success.");
+						BorrowerPage pageBorrower = new BorrowerPage();
+						pageBorrower.setVisible(true);
+					}
+				});
 				buttonPane.add(cancelButton);
 			}
 		}
