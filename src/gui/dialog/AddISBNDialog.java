@@ -8,15 +8,26 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Rectangle;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
+import declarations.ISBN;
+import execs.ISBNEXE;
+import gui.BorrowerPage;
+import gui.LibrarianPage;
+
+@SuppressWarnings("serial")
 public class AddISBNDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -26,7 +37,6 @@ public class AddISBNDialog extends JDialog {
 	private JTextField jtxtfieldEdition;
 	private JTextField jtxtfieldPubYear;
 	private JTextField jtxtfieldAuthors;
-	private JLabel jlblBookName;
 	
 
 	/**
@@ -93,7 +103,7 @@ public class AddISBNDialog extends JDialog {
 			jtxtfieldISBN.setColumns(10);
 		}
 		{
-			jlblBookName = new JLabel("BookName:");
+			JLabel jlblBookName = new JLabel("BookName:");
 			jlblBookName.setFont(new Font("Lucida Console", Font.PLAIN, 12));
 			GridBagConstraints gbc_jlblBookName = new GridBagConstraints();
 			gbc_jlblBookName.anchor = GridBagConstraints.EAST;
@@ -209,12 +219,55 @@ public class AddISBNDialog extends JDialog {
 			{
 				JButton addButton = new JButton("Add");
 				addButton.setActionCommand("OK");
+				addButton.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						ISBN isbn = new ISBN();
+						boolean boolIsFilled = !jtxtfieldISBN.getText().equals("") && !jtxtfieldBookName.getText().equals("") &&
+											   !jtxtfieldDescription.getText().equals("") &&  !jtxtfieldEdition.getText().equals("") &&
+											   !jtxtfieldPubYear.getText().equals("") && !jtxtfieldAuthors.getText().equals("")  ;
+						try { 
+							if (boolIsFilled) {
+								Date PubYear = new SimpleDateFormat("yyyy").parse(jtxtfieldPubYear.getText());
+								java.sql.Date pubyear = new java.sql.Date(PubYear.getTime());
+								
+								ISBNEXE.setValues(isbn,
+										jtxtfieldISBN.getText(),
+										jtxtfieldBookName.getText(),
+										jtxtfieldDescription.getText(),
+										jtxtfieldEdition.getText(),
+										pubyear,
+										jtxtfieldAuthors.getText());
+								
+								JOptionPane.showMessageDialog(null, ISBNEXE.exeInsertStatements(isbn));
+								
+								setVisible(false);
+								LibrarianPage pageLibrarian = new LibrarianPage();
+								pageLibrarian.setVisible(true);
+							} else {
+								JOptionPane.showMessageDialog(null, "Input Required Fields");
+							}
+						} catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+				});
 				buttonPane.add(addButton);
 				getRootPane().setDefaultButton(addButton);
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.setActionCommand("Cancel");
+				cancelButton.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						setVisible(false);
+						JOptionPane.showMessageDialog(null, "Cancel Success.");
+						LibrarianPage pageLibrarian = new LibrarianPage();
+						pageLibrarian.setVisible(true);
+					}
+				});
 				buttonPane.add(cancelButton);
 			}
 		}

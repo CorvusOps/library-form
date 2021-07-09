@@ -1,17 +1,20 @@
 package declarations;
 
+import java.sql.Date;
+
 public class ISBN {
-	private int PubYear;
+	private Date PubYear;
 	private String  ISBN,
 					BookName, 
 					Description, 
 					Edition, 
 					Author;
 	
-	public int getPubYear() {
+	
+	public Date getPubYear() {
 		return PubYear;
 	}
-	public void setPubYear(int pubYear) {
+	public void setPubYear(Date pubYear) {
 		PubYear = pubYear;
 	}
 	public String getISBN() {
