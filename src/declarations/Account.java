@@ -2,26 +2,27 @@ package declarations;
 
 public class Account {
 	
-	private  int BorrowerID;
-	private  String BorrowerName,
+	private  int AccountID;
+	private  String AccountName,
 					Address,
 					City,
 					Province,
 					Country,
-					Role;
+					Role,
+					ContactNum,
+					Email;
 	
-
-	public int getBorrowerID() {
-		return BorrowerID;
+	public int getAccountID() {
+		return AccountID;
 	}
-	public void setBorrowerID(int borrowerID) {
-		BorrowerID = borrowerID;
+	public void setAccountID(int accountID) {
+		AccountID = accountID;
 	}
-	public String getBorrowerName() {
-		return BorrowerName;
+	public String getAccountName() {
+		return AccountName;
 	}
-	public void setBorrowerName(String borrowerName) {
-		BorrowerName = borrowerName;
+	public void setAccountName(String accountName) {
+		AccountName = accountName;
 	}
 	public String getAddress() {
 		return Address;
@@ -53,5 +54,19 @@ public class Account {
 	public void setRole(String role) {
 		Role = role;
 	}
+	public String getContactNum() {
+		return ContactNum;
+	}
+	public void setContactNum(String contactNum) {
+		ContactNum = contactNum;
+	}
+	public String getEmail() {
+		return Email;
+	}
+	public void setEmail(String email) {
+		Email = email;
+	}
 	
+	
+		
 }
