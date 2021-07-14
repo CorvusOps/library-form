@@ -1,5 +1,9 @@
 package execs;
 
+import java.util.ArrayList;
+
+import javax.swing.table.DefaultTableModel;
+
 import declarations.Account;
 
 public class AccountEXE {
@@ -25,5 +29,25 @@ public class AccountEXE {
 		} else {
 			return "Changes failed to reflect in the database. Try Again";
 		}
+	}
+
+	public static void ReadAccountTable(DefaultTableModel table) {
+		ArrayList<Account> account = AccountCRUD.ReadAccount();
+		
+		for (Account accounts : account) {
+			Object objList[] = {
+								accounts.getAccountID(),
+								accounts.getAccountName(), 
+								accounts.getAddress(),
+								accounts.getCity(),
+								accounts.getProvince(),
+								accounts.getCountry(),
+								accounts.getRole(),
+								accounts.getContactNum(),
+								accounts.getEmail()
+								};
+			table.addRow(objList);
+		}
+		
 	}
 }
