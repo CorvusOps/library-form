@@ -12,6 +12,7 @@ public class Account {
 					ContactNum,
 					Email;
 	
+	
 	public int getAccountID() {
 		return AccountID;
 	}

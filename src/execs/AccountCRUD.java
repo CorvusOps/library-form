@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import connection.DbConnection;
 import declarations.Account;
@@ -62,4 +63,35 @@ public class AccountCRUD {
 		
 		return intResult;
 	}
+
+	public static ArrayList<Account> ReadAccount() {
+		ArrayList<Account> account = new ArrayList<Account>();
+		try {
+			conn =   DbConnection.getConnection();
+			objPreparedStatementObject = conn.prepareStatement("SELECT * FROM account_table");  
+			ojbResultSetObject = objPreparedStatementObject.executeQuery();
+		
+			while(ojbResultSetObject.next()) {
+				Account accounts = new Account();
+				accounts.setAccountID(ojbResultSetObject.getInt("AccountID"));
+				accounts.setAccountName(ojbResultSetObject.getString("AccountName"));
+				accounts.setAddress(ojbResultSetObject.getString("Address"));
+				accounts.setCity(ojbResultSetObject.getString("City"));
+				accounts.setProvince(ojbResultSetObject.getString("Province"));
+				accounts.setCountry(ojbResultSetObject.getString("Country"));
+				accounts.setRole(ojbResultSetObject.getString("Role"));
+				accounts.setContactNum(ojbResultSetObject.getString("ContactNum"));
+				accounts.setEmail(ojbResultSetObject.getString("Email"));
+
+				
+				account.add(accounts);
+			}
+		}catch(Exception e){
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		}  
+	return account;
+	}
+
+
 }

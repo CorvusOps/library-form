@@ -19,9 +19,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import execs.AccountCRUD;
 import gui.dialog.AddBookDialog;
 import gui.dialog.AddISBNDialog;
 import gui.dialog.FormDialog;
+import gui.frame.LogFramePage;
 
 public class LibrarianPage extends JFrame {
 
@@ -30,18 +32,8 @@ public class LibrarianPage extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LibrarianPage frame = new LibrarianPage();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
+	
 
 	/**
 	 * Create the frame.
@@ -185,6 +177,13 @@ public class LibrarianPage extends JFrame {
 		//viewLogPanel
 		JPanel panelViewLog = new JPanel();
 		panelViewLog.setBorder(new LineBorder(new Color(255, 228, 181), 5, true));
+		panelViewLog.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				LogFramePage logs = new LogFramePage();
+				logs.setVisible(true);
+			}
+		});
 		GridBagConstraints gbc_panelViewLog = new GridBagConstraints();
 		gbc_panelViewLog.gridwidth = 2;
 		gbc_panelViewLog.gridx = 1;
