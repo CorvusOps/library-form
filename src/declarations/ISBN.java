@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class ISBN {
 	private Date PubYear;
+	private int ISBNID;
 	private String  ISBN,
 					BookName, 
 					Description, 
@@ -11,6 +12,12 @@ public class ISBN {
 					Author;
 	
 	
+	public int getISBNID() {
+		return ISBNID;
+	}
+	public void setISBNID(int iSBNID) {
+		ISBNID = iSBNID;
+	}
 	public Date getPubYear() {
 		return PubYear;
 	}

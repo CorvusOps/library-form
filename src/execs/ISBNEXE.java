@@ -1,6 +1,9 @@
 package execs;
 
 import java.sql.Date;
+import java.util.ArrayList;
+
+import javax.swing.table.DefaultTableModel;
 
 import declarations.ISBN;
 
@@ -26,6 +29,24 @@ public class ISBNEXE {
 		} else {
 			return "Changes failed to reflect in the database. Try Again";
 		}
+	}
+	
+	public static void ReadISBNTable(DefaultTableModel table) {
+		ArrayList<ISBN> isbn = ISBNCRUD.ReadISBN();
+		
+		for (ISBN ISBNS : isbn) {
+			Object objList[] = {
+					ISBNS.getISBNID(),
+					ISBNS.getISBN(), 
+					ISBNS.getBookName(),
+					ISBNS.getDescription(),
+					ISBNS.getEdition(),
+					ISBNS.getPubYear(),
+					ISBNS.getAuthor(),
+								};
+			table.addRow(objList);
+		}
+		
 	}
 
 }
