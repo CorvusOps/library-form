@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import connection.DbConnection;
+import declarations.Account;
 import declarations.ISBN;
 
 public class ISBNCRUD {
@@ -57,5 +59,30 @@ public class ISBNCRUD {
 		return intResult;
 	}
 	
+	public static ArrayList<ISBN> ReadISBN() {
+		ArrayList<ISBN> isbn = new ArrayList<ISBN>();
+		try {
+			conn =   DbConnection.getConnection();
+			objPreparedStatementObject = conn.prepareStatement("SELECT * FROM isbn_table");  
+			ojbResultSetObject = objPreparedStatementObject.executeQuery();
+		
+			while(ojbResultSetObject.next()) {
+				ISBN isbns = new ISBN();
+				isbns.setISBNID(ojbResultSetObject.getInt("ISBN_ID"));
+				isbns.setISBN(ojbResultSetObject.getString("ISBN"));
+				isbns.setBookName(ojbResultSetObject.getString("BookName"));
+				isbns.setDescription(ojbResultSetObject.getString("Description"));
+				isbns.setEdition(ojbResultSetObject.getString("Edition"));
+				isbns.setPubYear(ojbResultSetObject.getDate("PubYear"));
+				isbns.setAuthor(ojbResultSetObject.getString("Author"));
+					
+				isbn.add(isbns);
+			}
+		}catch(Exception e){
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		}  
+	return isbn;
+	}
 	
 }

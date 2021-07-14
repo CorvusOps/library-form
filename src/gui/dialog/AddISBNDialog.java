@@ -10,6 +10,7 @@ import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -247,8 +248,9 @@ public class AddISBNDialog extends JDialog {
 							} else {
 								JOptionPane.showMessageDialog(null, "Input Required Fields");
 							}
-						} catch (Exception e1) {
+						}  catch (ParseException e1) {
 							// TODO Auto-generated catch block
+							JOptionPane.showMessageDialog(null, "Please Format Date this way. (mm/dd/yyyy)");
 							e1.printStackTrace();
 						}
 					}
