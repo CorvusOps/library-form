@@ -250,7 +250,7 @@ public class AddISBNDialog extends JDialog {
 							}
 						}  catch (ParseException e1) {
 							// TODO Auto-generated catch block
-							JOptionPane.showMessageDialog(null, "Please Format Date this way. (mm/dd/yyyy)");
+							JOptionPane.showMessageDialog(null, "Please Format Date this way. (yyyy)");
 							e1.printStackTrace();
 						}
 					}

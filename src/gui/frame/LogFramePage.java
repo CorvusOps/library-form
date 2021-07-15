@@ -16,11 +16,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import gui.BorrowerPage;
+import gui.LibrarianPage;
 import gui.frame.panels.AccountsPanel;
 import gui.frame.panels.BookISBNPanel;
+import gui.frame.panels.BookLibPanel;
+import gui.frame.panels.BorrowsPanel;
 import gui.frame.panels.WelcomePanel;
 
 @SuppressWarnings("serial")
@@ -30,6 +35,9 @@ public class LogFramePage extends JFrame {
 	
 	private gui.frame.panels.AccountsPanel accountsPanel = new AccountsPanel();
 	private gui.frame.panels.BookISBNPanel isbnPanel = new BookISBNPanel();
+	private gui.frame.panels.BookLibPanel bookPanel = new BookLibPanel();
+	private gui.frame.panels.BorrowsPanel borrowsPanel = new BorrowsPanel();
+	
 	
 	private JPanel currentShownPanel;
 
@@ -104,7 +112,12 @@ public class LogFramePage extends JFrame {
 		JButton btnBorrows = new JButton("Borrows");
 		btnBorrows.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			
+				if(currentShownPanel != null && currentShownPanel != borrowsPanel)
+					remove(currentShownPanel);
+				currentShownPanel = borrowsPanel;
+				getContentPane().add(borrowsPanel, BorderLayout.CENTER);
+				revalidate();
+				repaint();
 			}
 		});
 		btnBorrows.setBackground(new Color(255, 228, 181));
@@ -145,10 +158,10 @@ public class LogFramePage extends JFrame {
 		JButton btnBooks = new JButton("Books");
 		btnBooks.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//if(currentShownPanel != null && currentShownPanel != isbnPanel)
-				//	remove(currentShownPanel);
-				//currentShownPanel = isbnPanel;
-				//getContentPane().add(isbnPanel, BorderLayout.CENTER);
+				if(currentShownPanel != null && currentShownPanel != bookPanel)
+					remove(currentShownPanel);
+				currentShownPanel = bookPanel;
+				getContentPane().add(bookPanel, BorderLayout.CENTER);
 				revalidate();
 				repaint();
 			}
@@ -272,6 +285,9 @@ public class LogFramePage extends JFrame {
 		JButton btnReturn = new JButton("Return");
 		btnReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				setVisible(false);
+				LibrarianPage pageLibrarian = new LibrarianPage();
+				pageLibrarian.setVisible(true);
 			}
 		});
 		btnReturn.setBackground(new Color(255, 228, 181));
