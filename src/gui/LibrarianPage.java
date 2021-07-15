@@ -180,6 +180,7 @@ public class LibrarianPage extends JFrame {
 		panelViewLog.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
 				LogFramePage logs = new LogFramePage();
 				logs.setVisible(true);
 			}

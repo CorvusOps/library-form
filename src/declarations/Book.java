@@ -1,10 +1,8 @@
 package declarations;
 
 public class Book {
-	private int BookCode;
-	private String LocDescription;
-	private ISBN iSBN;
-
+	private int BookCode, ISBN;
+	private String LocDescription, ISBNstr;
 	
 	public int getBookCode() {
 		return BookCode;
@@ -12,21 +10,24 @@ public class Book {
 	public void setBookCode(int bookCode) {
 		BookCode = bookCode;
 	}
+	public int getISBN() {
+		return ISBN;
+	}
+	public void setISBN(int iSBN) {
+		ISBN = iSBN;
+	}
 	public String getLocDescription() {
 		return LocDescription;
 	}
 	public void setLocDescription(String locDescription) {
 		LocDescription = locDescription;
 	}
-	public ISBN getiSBN() {
-		return iSBN;
+	public String getISBNstr() {
+		return ISBNstr;
 	}
-	public void setiSBN(ISBN iSBN) {
-		this.iSBN = iSBN;
+	public void setISBNstr(String iSBNstr) {
+		ISBNstr = iSBNstr;
 	}
-	
-	
-	
-	
-	
+
+
 }
